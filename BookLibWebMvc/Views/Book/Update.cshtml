@@ -1,0 +1,73 @@
+﻿@using BookLibWebMvc.EntitiesDto
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@model BookDto
+@{
+    ViewBag.Title = "Add";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="jumbotron">
+            <h1 class="display-4">Update Book</h1>
+            <p class="lead">Add a new Book to the available list.</p>
+        </div>
+    </div>
+</div>
+
+@*<a asp-controller="Book" asp-action="Index" class="btn btn-secondary" style="width: 100px">Back</a> *@
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-controller="Book" asp-action="Update" method="post">
+    <div class="form-row">
+        <div class="col-md-6 offset-md-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BookId" />
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" /><br />
+                    @Html.ValidationMessageFor(x => x.Title)
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <input asp-for="Description" class="form-control" /><br />
+                    @Html.ValidationMessageFor(x => x.Description)
+                </div>
+                <div class="form-group">
+                    <label asp-for="DatePublished"></label>
+                    <input asp-for="DatePublished" type="date" class="form-control" /><br />
+                    @Html.ValidationMessageFor(x => x.DatePublished)
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label asp-for="GenreId" class="control-label"></label>
+                    <select asp-for="GenreId" class="form-control" asp-items="ViewBag.Genres"></select>
+                    <span asp-validation-for="GenreId" class="text-danger"></span><br />
+                </div>
+                <div class="form-group">
+                    <label asp-for="PublisherId" class="control-label"></label>
+                    <select asp-for="PublisherId" class="form-control" asp-items="ViewBag.Publishers"></select>
+                    <span asp-validation-for="PublisherId" class="text-danger"></span><br />
+                </div>
+                <div class="form-group">
+                    <label asp-for="AuthorIds" class="control-label"></label>
+                    <select asp-for="AuthorIds" class="form-control" asp-items="ViewBag.Authors" multiple></select>
+                    <span asp-validation-for="AuthorIds" class="text-danger"></span><br />
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary w-100" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <a asp-controller="Book" asp-action="Index" class="btn btn-secondary  w-100">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

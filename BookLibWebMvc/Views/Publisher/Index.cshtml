@@ -1,0 +1,56 @@
+﻿@using BookLibWebMvc.EntitiesDto
+@addTagHelper *, AuthoringTagHelpers
+@model List<PublisherDto>
+@{
+    ViewBag.Title = "Publisher List";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="jumbotron">
+            <h1 class="display-4">List of Publisher</h1>
+            <p class="lead">This is the list of all of the book Publisher currently available for this project.</p>
+        </div>
+    </div>
+</div>
+
+<a asp-controller="Publisher" asp-action="Add" class="btn btn-sm btn-success" style="width: 100px">
+<i class="fa-solid fa-plus"></i> Create</a>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" style="width:100%">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Publisher Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var publisher in Model)
+                    {
+                        <tr>
+                            <td>@publisher.PublisherId</td>
+                            <td>@publisher.Name</td>
+                            <td>
+                                <form asp-action="Delete" asp-route-id="@publisher.PublisherId">
+                                    <div class="btn-group btn-group-sm">
+                                        <a asp-action="Update" asp-route-id="@publisher.PublisherId" class="btn btn-warning">
+                                            <i class="fas fa-edit"></i> </a> 
+                                        <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Are you sure to delete this record?')">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                    </div>
+                                </form>
+                             </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
